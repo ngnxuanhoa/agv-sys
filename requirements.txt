@@ -1,6 +1,0 @@
-flask
-flask-socketio
-opencv-python
-numpy
-RPi.GPIO
-adafruit-circuitpython-motorkit
