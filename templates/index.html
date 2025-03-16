@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGV Control Panel</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        .control-buttons { margin-top: 20px; }
+        button { width: 100px; height: 50px; font-size: 18px; margin: 5px; }
+        .camera-frame { width: 640px; height: 480px; border: 2px solid black; margin: 20px auto; }
+    </style>
+</head>
+<body>
+    <h1>AGV Control Panel</h1>
+    <div class="camera-frame">
+        <img id="camera-stream" src="/video_feed" width="640" height="480" alt="Camera Stream">
+    </div>
+    <div class="control-buttons">
+        <button onclick="sendCommand('forward')">⬆️ Tiến</button><br>
+        <button onclick="sendCommand('left')">⬅️ Trái</button>
+        <button onclick="sendCommand('stop')">⏹ Dừng</button>
+        <button onclick="sendCommand('right')">➡️ Phải</button><br>
+        <button onclick="sendCommand('backward')">⬇️ Lùi</button>
+    </div>
+    <script>
+        function sendCommand(command) {
+            fetch(`/control?cmd=${command}`)
+                .then(response => response.text())
+                .then(data => console.log(data))
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
